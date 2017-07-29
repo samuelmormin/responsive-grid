@@ -1,0 +1,63 @@
+/*
+Description : Responsive Grid
+Author : Samuel MORMIN
+Date : 29/07/2017
+*/
+
+// Grid properties are defined here
+$columns  = 12
+$gutters  = 20
+$baseline = 12
+
+// Breackpoints are defined here
+$mobile    = 320
+$tablet    = 768
+$desktop   = 992
+desktop-hd = 1200
+
+// This function creates columns classes and sets container size
+createColumns($suffix, $container-size)
+    for $i in 1..$columns
+        .col{$suffix}{$i}
+            @extends .col
+            width ($i / $columns * 100%)
+    .container
+        width $container-size
+
+// Grid settings       
+*
+    box-sizing border-box
+    font-size 0
+.col
+    display inline-block
+    font-size 36px
+    padding 0 ($gutters / 2)px
+    margin ($baseline)px 0
+.container
+    padding 0
+    margin 0 auto
+    background-color #fefefe
+    font-family sans-serif
+    .row
+        width 100%
+        height auto
+        padding 0 10px
+
+// Creates the basic columns classes by using the function (col-1,...)
+createColumns( '-', 1000px)
+
+// Sets the media queries for Mobiles (col-s-1,...)
+@media screen and (min-width: ($mobile)px)
+    createColumns(-s-, 100%)
+        
+// Sets the media queries for Tablets (col-m-1,...)
+@media screen and (min-width: ($tablet)px)
+    createColumns(-m-, 768px)
+
+// Sets the media queries for Desktops (col-l-1,...)
+@media screen and (min-width: ($desktop)px)
+    createColumns(-l-, 1000px)
+
+// Sets the media queries for HD Desktops (col-xl-1,...)
+//@media screen and (max-width: ($desktop-hd)px)
+//    createColumns(-xl-, 500px)
